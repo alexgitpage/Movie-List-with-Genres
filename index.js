@@ -57,10 +57,12 @@
       // displayDataList(data)
       // console.log(data)
       displayCardlList(lists)
+      displayDataList(data)
     })
     .catch()
 
   const dataPanel = document.getElementById('data-panel')
+
 
   function displayDataList(data) {
     let htmlContent = ''
@@ -70,7 +72,8 @@
           <div class="card mb-2">
             <img class="card-img-top" src="${POSTER_URL}${item.image}">
             <div class="card-body movie-item-body">
-             <h6>${item.title}</h6>
+              <h5>${item.title}</h5>
+              ${displayEachMovieGenres(item.genres)}
             </div>
           </div>
         </div>
@@ -95,24 +98,22 @@
   function displayEachMovieGenres(genres) {
     let eachGenre = ``
     for (let i = 0; i < genres.length; i++) {
-      eachGenre += `<p>${lists[genres[i]]}</p>`
+      eachGenre += `<li class="class="btn btn-primary">${lists[genres[i]]}</li>`
     }
     return eachGenre
-
   }
 
   //check movies by click the list
   listPanel.addEventListener('click', event => {
-    let listName = event.target.textContent
+    let listName = event.target.dataset.textContent
     let results = []
 
-    console.log("click")
     results = data.filter(function (item) {
       return (item.genres).includes(Number(reverseLists[listName]))
     })
 
     displayDataList(results)
-    console.log(results)
+    displayEachMovieGenres(genres)
   })
 
 })()
